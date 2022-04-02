@@ -30,9 +30,11 @@
   thunk加上asyc/await的用法更为直观。
 
 ### npm i
+如果npm i报错
+（可能安装 node-sass 的时候总是会各种不成功，大部分安装不成功的原因都源自这里，因为 GitHub Releases 里的文件都托管在 s3.amazonaws.com上面，而这个网址在国内总是网络不稳定，所以我们需要通过第三方服务器下载这个文件）
 先安装
 npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass
-npm install react-redux
+然后
 npm i
   
 ### `npm start`
