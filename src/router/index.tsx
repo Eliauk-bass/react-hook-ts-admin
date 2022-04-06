@@ -16,7 +16,7 @@ export default () => {
         <Redirect exact from='/' to='/login' />
         <Route path="/home" component={BasicLayout} />
         <Route path="/user" component={UserLayout} />
-        <Route key={1} path='/login' component={Login}  />
+        <Route exact path='/login' component={Login}  />
       </Switch>
     </HashRouter>
   )

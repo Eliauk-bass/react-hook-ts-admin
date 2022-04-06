@@ -63,5 +63,3 @@ declare module '*.module.sass' {
   export default classes;
 }
 
-// declare module 'xxx'路径或者模块名
-declare module 'react-router-redux' 
