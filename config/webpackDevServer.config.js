@@ -81,7 +81,16 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy: {
+      '/httpServer': {
+        target: 'http://localhost:3000', //后台服务器地址
+        changeOrigin: true, //target为域名时必须设置此项
+        secure: false, //设置支持 https 协议的代理
+        pathRewrite: {
+          '^/httpServer': `http://localhost:${host}`, //本地地址
+        },
+      }
+    },
     before(app, server) {
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons
