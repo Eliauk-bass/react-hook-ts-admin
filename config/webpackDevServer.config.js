@@ -9,6 +9,7 @@ const fs = require('fs');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 8888;
 
 module.exports = function(proxy, allowedHost) {
   return {
@@ -87,7 +88,7 @@ module.exports = function(proxy, allowedHost) {
         changeOrigin: true, //target为域名时必须设置此项
         secure: false, //设置支持 https 协议的代理
         pathRewrite: {
-          '^/httpServer': `http://localhost:${host}`, //本地地址
+          '^/httpServer': `http://localhost:${DEFAULT_PORT}`, //本地地址
         },
       }
     },
