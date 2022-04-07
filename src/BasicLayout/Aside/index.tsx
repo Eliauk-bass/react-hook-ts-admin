@@ -11,13 +11,24 @@ export function Aside(){
   const hash = window.location.hash.split('#')[1]
   const defaultSelectedKeys = hash.split('?')[0]
 
+  const jumpLink = (url)=>{
+    //接口拦截器
+    if (window?.cancelAjax) {//当路由切换页面的时候，遍历全局数组，将上一个页面的所有请求cancel掉
+      window.cancelAjax.map((ele) => {
+        ele();
+      });
+    }
+    window.cancelAjax = [];
+    return url
+  }
+
   //二级栏（因不清楚需求参数，any）
   const mapNav = (child:any):any  =>{
     return(
       child.map((obj:any)=>{
         return(
         <Menu.Item key={obj.url}>
-          <Link  to={`${obj.url}`} >
+          <Link  to={()=>jumpLink(obj.url)} >
           {obj.item}
           </Link>
         </Menu.Item>
@@ -44,7 +55,7 @@ export function Aside(){
           return(
             <Menu.Item key={obj.url}>
             <span>{obj.menu}</span>
-            <Link  to={`${obj.url}`}></Link>
+            <Link  to={()=>jumpLink(obj.url)} ></Link>
             </Menu.Item>
           )
         }

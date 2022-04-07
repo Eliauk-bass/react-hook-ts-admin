@@ -4,26 +4,45 @@ import {
 } from './constants';
 import { loginCheck } from '../../models/common';
 import { push } from 'react-router-redux'
-
+import axios from 'axios'
+import request from "../../utils/request";
 
 interface loginRes {
   data: string;
   errorCode: number;
   errorMessage: string;
 }
-const checkLogin = (param: loginCheck) => {
-  if (param.username === 'admin' && param.password === '123') {
-    return {
-      data: '',
-      errorCode: 0,
-      errorMessage: '登录成功'
-    }
-  }
-  return {
+
+const checkLogin = async(param: loginCheck) => {
+  let obj: loginRes = {
     data: '',
     errorCode: -1,
     errorMessage: '账号或密码错误，登录失败'
   }
+  // await axios({
+  //   method: 'get',
+  //   url: '/httpServer/login'
+  // }).then((res: any) => {
+  //   if (param.username === res.data.username && param.password === res.data.password) {
+  //       obj.data = '',
+  //       obj.errorCode = 0,
+  //       obj.errorMessage = '登录成功'
+  //   }
+  // }).catch((err :any) => {
+
+  // })
+  await request('/httpServer/login', {
+    method: "get",
+    param:{}
+  }).then((res: any) => {
+       if (param.username === res.username && param.password === res.password) {
+        obj.data = '',
+        obj.errorCode = 0,
+        obj.errorMessage = '登录成功'
+    }
+  }).catch((err :any) => {
+  })
+  return obj
 }
 
 export const userLoadingSuccess = (response: loginRes) => {
@@ -48,7 +67,7 @@ export const userLoginReq = (param: loginCheck) => {
         await dispatch(userLoadingSuccess(response));
         // dispatch(push('/home'));
         setTimeout(() => {
-          window.location.hash=`/home`
+          window.location.hash = `/main/home`
         }, 500);
       } else {
         await dispatch(userLoginFail(response));

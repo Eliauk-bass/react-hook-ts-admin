@@ -1,7 +1,9 @@
 import {
   Home,
+  Management
 } from '../pages'
 
 export default [
-  { path: '/home', component: Home },
+  { path: '/main/home', component: Home },
+  { path: '/main/management', component: Management },
 ]

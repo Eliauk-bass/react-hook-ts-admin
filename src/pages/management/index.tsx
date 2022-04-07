@@ -3,11 +3,12 @@ import request from "../../utils/request";
 import { Button } from 'antd';
 import './index.scss';
 
-const Home: React.FC = () => {
 
-  // const [isDisable]=useState(true);
-  useEffect(() => {
-    request('/httpServer/homeData', {
+const Management: React.FC = () => {
+
+   // const [isDisable]=useState(true);
+   useEffect(() => {
+    request('/httpServer/manageData', {
       method: "get",
       param: {}
     }).then((res: any) => {
@@ -16,11 +17,11 @@ const Home: React.FC = () => {
   });
 
   return (
-    <div className="Home">
-      <Button type="primary">你好</Button>
-      <div className='all'>The Bay</div>
+    <div className="management">
+      <Button type="primary">hahha</Button>
+      <div className='all'>test</div>
     </div>
   );
 }
 
-export default Home;
+export default Management;

@@ -14,7 +14,7 @@ export default () => {
       <Switch>
         {/* <Redirect exact from='/' to='/home' /> */}
         <Redirect exact from='/' to='/login' />
-        <Route path="/home" component={BasicLayout} />
+        <Route path="/main" component={BasicLayout} />
         <Route path="/user" component={UserLayout} />
         <Route exact path='/login' component={Login}  />
       </Switch>
